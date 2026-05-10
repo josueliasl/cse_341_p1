@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/josueliasl/cse_341_p1/issues"
   },
-  "homepage": "https://github.com/josueliasl/cse_341_p1#readme"
+  "homepage": "https://github.com/josueliasl/cse_341_p1#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
