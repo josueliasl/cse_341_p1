@@ -1,11 +1,12 @@
+require("dotenv").config();
+
 const connectDB = require("./db");
+const User = require("./models/User");
 
 async function run() {
-    const db = await connectDB();
+    await connectDB();
 
-    const users = db.collection("users");
-
-    const result = await users.insertOne({
+    const result = await User.create({
         name: "Josue",
         age: 22
     });
