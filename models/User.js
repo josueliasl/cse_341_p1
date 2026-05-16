@@ -1,12 +1,25 @@
 const mongoose = require("mongoose");
 
+//The model defines the MongoDB schema.
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
         type: String,
         required: true
     },
-    age: {
-        type: Number,
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    favoriteColor: {
+        type: String,
+        required: true
+    },
+    birthday: {
+        type: String,
         required: true
     }
 });
