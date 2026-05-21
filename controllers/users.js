@@ -4,30 +4,43 @@ const User = require("../models/User");
 const getAll = async (req, res) => {
     try {
         const users = await User.find();
+
         res.status(200).json(users);
+
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
 
 // GET single contact
 const getSingle = async (req, res) => {
     try {
+
         const user = await User.findById(req.params.id);
 
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({
+                message: "Contact not found"
+            });
         }
 
         res.status(200).json(user);
+
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
 
 // CREATE contact
 const createUser = async (req, res) => {
     try {
+
         const user = await User.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -42,7 +55,10 @@ const createUser = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
 
@@ -61,14 +77,19 @@ const updateUser = async (req, res) => {
             }
         );
 
-        if (result.modifiedCount > 0) {
-            res.status(204).send();
-        } else {
-            res.status(404).json({ message: "Contact not found" });
+        if (result.matchedCount === 0) {
+            return res.status(404).json({
+                message: "Contact not found"
+            });
         }
 
+        res.status(204).send();
+
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
 
@@ -80,14 +101,19 @@ const deleteUser = async (req, res) => {
             _id: req.params.id
         });
 
-        if (result.deletedCount > 0) {
-            res.status(204).send();
-        } else {
-            res.status(404).json({ message: "Contact not found" });
+        if (result.deletedCount === 0) {
+            return res.status(404).json({
+                message: "Contact not found"
+            });
         }
 
+        res.status(204).send();
+
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
 
@@ -98,4 +124,3 @@ module.exports = {
     updateUser,
     deleteUser
 };
-

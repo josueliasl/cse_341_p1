@@ -5,11 +5,13 @@ const doc = {
         title: "Contacts API",
         description: "Contacts API documentation"
     },
-    host: "cse-341-p1-1.onrender.com",
-    schemes: ["https"]
+
+    host: "localhost:3000",
+    schemes: ["http"]
 };
 
 const outputFile = "./swagger.json";
+
 const routes = ["./server.js"];
 
 swaggerAutogen(outputFile, routes, doc);
