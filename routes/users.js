@@ -3,10 +3,7 @@ const router = express.Router();
 
 const usersController = require("../controllers/users");
 const validation = require("../middleware/validate");
-
-/* 
-    #swagger.tags = ['Contacts']
-*/
+const authenticate = require("../middleware/authenticate");
 
 // GET all contacts
 router.get("/", usersController.getAll);
@@ -17,6 +14,7 @@ router.get("/:id", usersController.getSingle);
 // POST create contact
 router.post(
     "/",
+    authenticate,
     validation.validateUser,
     usersController.createUser
 );
@@ -24,11 +22,16 @@ router.post(
 // PUT update contact
 router.put(
     "/:id",
+    authenticate,
     validation.validateUser,
     usersController.updateUser
 );
 
 // DELETE contact
-router.delete("/:id", usersController.deleteUser);
+router.delete(
+    "/:id",
+    authenticate,
+    usersController.deleteUser
+);
 
 module.exports = router;

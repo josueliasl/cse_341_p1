@@ -3,10 +3,7 @@ const router = express.Router();
 
 const booksController = require("../controllers/books");
 const validation = require("../middleware/validate");
-
-/* 
-    #swagger.tags = ['Books']
-*/
+const authenticate = require("../middleware/authenticate");
 
 // GET all books
 router.get("/", booksController.getAll);
@@ -17,6 +14,7 @@ router.get("/:id", booksController.getSingle);
 // POST create book
 router.post(
     "/",
+    authenticate,
     validation.validateBook,
     booksController.createBook
 );
@@ -24,11 +22,16 @@ router.post(
 // PUT update book
 router.put(
     "/:id",
+    authenticate,
     validation.validateBook,
     booksController.updateBook
 );
 
 // DELETE book
-router.delete("/:id", booksController.deleteBook);
+router.delete(
+    "/:id",
+    authenticate,
+    booksController.deleteBook
+);
 
 module.exports = router;
