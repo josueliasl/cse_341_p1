@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+console.log("CLIENT ID:", process.env.GITHUB_CLIENT_ID);
+console.log("CALLBACK:", process.env.GITHUB_CALLBACK_URL);
+
 const cors = require("cors");
 const express = require("express");
 const session = require("express-session");
